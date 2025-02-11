@@ -1,8 +1,10 @@
 /* Write your T-SQL query statement below */
-with CTE as (
-select managerId from Employee
-group by managerId
-having count(id) >=5)
-select name from Employee e1
-join CTE c
-on e1.id= c.managerId
+ SELECT e1.name
+FROM Employee e1
+JOIN (
+    SELECT managerId, COUNT(id) AS direct_reports
+    FROM Employee
+    WHERE managerId IS NOT NULL
+    GROUP BY managerId
+    HAVING COUNT(id) >= 5
+) e2 ON e1.id = e2.managerId;
