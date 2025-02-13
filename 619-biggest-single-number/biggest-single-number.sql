@@ -6,3 +6,4 @@ having count(num)=1)
 SELECT ISNULL(
 (SELECT TOP 1 num FROM CTE ORDER BY num DESC), 
 NULL) AS num;
+ 
