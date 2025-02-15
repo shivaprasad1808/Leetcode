@@ -3,7 +3,6 @@ with CTE as(
 select id, student,
 lag(student, 1) over(order by id) as prev_value,
 lead(student, 1) over(order by id) as next_value,
-row_number() over(order by id) as rn,
 count(*) over() as total_rows 
 from seat)
 select id, 
