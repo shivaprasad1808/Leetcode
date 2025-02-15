@@ -1,5 +1,7 @@
 /* Write your T-SQL query statement below */
- select max(a.salary) as SecondHighestSalary 
-from employee a
- right join employee b
-on a.salary < b.salary;
+WITH RankedSalaries AS (
+    SELECT DISTINCT salary, 
+           DENSE_RANK() OVER (ORDER BY salary DESC) AS rnk
+    FROM employee
+)
+SELECT (SELECT salary as SecondHighestSalary  FROM RankedSalaries WHERE rnk = 2) AS SecondHighestSalary;
