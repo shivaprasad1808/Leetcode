@@ -43,7 +43,8 @@ COUNT(DISTINCT player_id) * 1.0 /
 FROM CTE
 WHERE DATEDIFF(day, prev_date, event_date) = 1;
 
-/*SOLUTION-3: To count the number of players that logged in for at least two consecutive days */
+/*SOLUTION-3: To count the number of players that logged in for at least two consecutive dayse, 
+then divide that number by the total number of players. */
 
 WITH CTE AS (
     SELECT player_id, 
